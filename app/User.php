@@ -15,8 +15,8 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
+     protected $fillable = [
+        'name','surname', 'email', 'phone','avatar', 'password','active','rol_id','rel_entiti_id'
     ];
 
     /**
@@ -27,4 +27,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    //un usuario posee/pertenece un rol
+    public function rol(){
+        return $this->belongsTo(Model\Admin\Rol::class);
+    }
+
+     //un usuario posee una cuenta
+    public function acount(){
+        return $this->belongsTo(Model\Admin\Acount::class);
+    }
 }

@@ -24,13 +24,17 @@ class CreateUsersTable extends Migration
             $table->boolean('active')->default(true);
             $table->rememberToken();
             $table->timestamps();
-
             $table->integer('rol_id')->unsigned()->default(2);            
             $table->foreign('rol_id')->references('id')->on('rols')
             ->onDelete('cascade')
-            ->onUpdate('cascade');            
+            ->onUpdate('cascade');
 
-            $table->integer('rel_entity_id')->unsigned(); //relación simbolica con alguna store, el tipo de cuenta determina la store            
+            $table->integer('acount_id')->unsigned()->default(1);            
+            $table->foreign('acount_id')->references('id')->on('acounts')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
+            
+            $table->integer('rel_entity_id')->unsigned(); //relación simbolica con alguna entidad.
         });
     }
 
