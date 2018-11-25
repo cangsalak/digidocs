@@ -12,25 +12,21 @@ class EntitiesTableSeeder extends Seeder
     public function run()
     {
         \DB::table('entities')->insert(array(
+        	'nit'=>'82345698-2',
 			'name'=>'Super-Administrador',
 			'department'=>'superAdmin',
 			'city'=>'city',
-			'adress'=>'adress',
-			'description'=>'description',
-			'adress'=>'adress',			
+			'adress'=>'Cr 1 #1 -101',
+			'phone1' => '45634567',
+			'phone2' => '45634562',
+			'phone3' => '45634563',
+			'email_institutional' => 'email@institutional.com',
+			'description' => 'description',
+			'slogan' => 'Institutional Slogan',
+			'scutcheon1' => 'scutcheon1.png',
+			'scutcheon2' => 'scutcheon2.png',
+			'label'=>'{}'			
 			)
-		);
-		\DB::table('entities')->insert(array(
-			'name'=>'Administrador',
-			'description'=>'admin',
-			'label'=>'{"options":["editProfile","editStore","paswordChange","acountSummary","sendSuggestions","termsConditions"]}'
-			)
-		);
-		\DB::table('entities')->insert(array(
-			'name'=>'Agente',
-			'description'=>'adminMeans',
-			'label'=>'{"options":["editProfile","paswordChange","acountSummary","sendSuggestions","termsConditions"]}'
-			)
-		);
+		);		
     }
 }

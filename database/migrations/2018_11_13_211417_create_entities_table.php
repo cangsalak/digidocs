@@ -23,7 +23,7 @@ class CreateEntitiesTable extends Migration
             $table->string('phone1',256)->nullable()->default(null);
             $table->string('phone2',256)->nullable()->default(null);
             $table->string('phone3',256)->nullable()->default(null);
-            $table->string('email_institucional',256)->nullable()->default(null);            
+            $table->string('email_institutional',256)->nullable()->default(null);            
             $table->string('description',512)->nullable()->default(null);
             $table->string('slogan',256)->nullable()->default(null);
             $table->string('scutcheon1', 256)->default('default.png');

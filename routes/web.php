@@ -19,3 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('locale', 'HomeController@postLocale')->name('locale');
+Route::resource('rol', 'Web\RolController');
+Route::resource('user', 'Web\UserController');
+Route::resource('module', 'Web\ModuleController');
+Route::resource('entity', 'Web\EntityController');

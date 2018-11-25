@@ -17,7 +17,9 @@ trait RegistersUsers
      */
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        if(Auth::user()->rol_id == 1)return view('auth.register');
+        //agregar message alert
+        return redirect()->route('home');
     }
 
     /**

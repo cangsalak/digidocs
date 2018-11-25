@@ -1,6 +1,22 @@
 @extends('layouts.app')
 
+@section('template')
+    <link href="{{ asset('css/custom/welcome.css') }}" rel="stylesheet">    
+@endsection
+
 @section('content')
+@auth<!-- no fondo -->
+@else
+    <div class="video-container">
+        <video loop="loop" id="video_background" autoplay preload muted>
+          <source 
+            src="{{ asset('media/digidocs-media-backgrownd.webm') }}" 
+            src="{{ asset('media/digidocs-media-backgrownd.mp4') }}"
+            type="video/webm">           
+          </source>
+        </video>
+    </div>
+@endauth
 <div class="container">
    <div class="flex-center position-ref full-height">
         <div class="col-md-12">
