@@ -22,10 +22,17 @@ class EntityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //muestra todos las entidades        
-        return View::make('entity.index')->with('data', ['entities' => Entity::all()]);
+        //con collection
+        //return View::make('entity.index')->with('data', ['entities' => Entity::all()]);
+        //dd(Entity::select()->paginate(3)->items());
+        //dd($request->input());
+        if($request->input('sort')){
+            //dd($request->input('sort'));
+        }
+        return View::make('entity.index')->with('data', ['entities' => Entity::select()->paginate(3)]);
     }
 
     /**
