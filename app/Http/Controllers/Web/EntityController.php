@@ -24,15 +24,35 @@ class EntityController extends Controller
      */
     public function index(Request $request)
     {
-        //muestra todos las entidades        
-        //con collection
-        //return View::make('entity.index')->with('data', ['entities' => Entity::all()]);
-        //dd(Entity::select()->paginate(3)->items());
-        //dd($request->input());
+        //muestra todos las entidades
+        
+        
+        //dd(Entity::select()->paginate(3)->items());        
+        
+        /*
         if($request->input('sort')){
             //dd($request->input('sort'));
         }
-        return View::make('entity.index')->with('data', ['entities' => Entity::select()->paginate(3)]);
+        */
+
+        $inputs = $request->input();
+        if(empty($inputs)){
+            $inputs['nit']=null;
+            $inputs['name']=null;
+            $inputs['description']=null;
+        }
+
+        $nit = $request->get('nit');
+        $name = $request->get('name');
+        $description = $request->get('description');
+
+        $entities = Entity::orderBy('id','DESC')
+            ->nit($nit)
+            ->name($name)
+            ->description($description)
+            ->paginate(15);                
+        //return View::make('entity.index')->with('data', ['entities' => $entities])->withInput($request->input());
+        return view('entity.index',compact('entities','inputs'));
     }
 
     /**
@@ -42,7 +62,7 @@ class EntityController extends Controller
      */
     public function create()
     {
-        //
+        return View::make('entity.create')->with('data', []);
     }
 
     /**
@@ -62,9 +82,11 @@ class EntityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show(Request $request,$id)
+    {   
+        //validamos las entradas $id
+        dd($request->input());
+        return $id;
     }
 
     /**
@@ -73,9 +95,10 @@ class EntityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        //
+        dd($request->input());
+        return $id;
     }
 
     /**
@@ -96,8 +119,9 @@ class EntityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-        //
+        dd($request->input());
+        return $id;
     }
 }
