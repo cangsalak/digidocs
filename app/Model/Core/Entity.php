@@ -6,7 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Entity extends Model
 {
-    protected $fillable = ['nit','name','department','city','adress','phone1','phone2','phone3','email_institutional','description','slogan','scutcheon1','scutcheon2','label','active'];
+    protected $fillable = [
+		'nit',
+		'name',
+		'department',
+		'city',
+		'adress',
+		'phone1',
+		'phone2',
+		'phone3',
+		'email_institutional',
+		'description',
+		'slogan',
+		'scutcheon1',
+		'scutcheon2',
+		'label',
+		'active'
+	];
 
     //Query Scope
     public function scopeNit($query,$nit){
@@ -23,10 +39,5 @@ class Entity extends Model
     	if($description){
     		return $query->where('description','LIKE',"%$description%");
     	}
-    }
-    
+    }    
 }
-
-
-
-
