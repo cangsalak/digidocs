@@ -11,7 +11,24 @@
             <div class="content">
             	<div class="row">
 	            	<div class="col-md-8 offset-md-2 entity-new-style">
-	            		create
+                       @include('layouts.alert')
+                            <div class="card">
+                                <div class="card-header">{{ __('form.createEntity') }}</div>
+                                <div class="card-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                {!! Form::model($entity,['enctype' => 'multipart/form-data','id'=>'form-table','route'=>['entity.store'],'method'=>'POST']) !!}
+                                                    
+                                                    @include('entity.form')
+
+                                                {!! Form::close() !!}
+                                                                    
+                                            </div>
+                                        </div>                                                  
+                                    </div>
+                                </div>
+                            </div>                     
 	            	</div>
             	</div>
             </div>            	

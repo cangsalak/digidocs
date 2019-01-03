@@ -61,8 +61,9 @@ class EntityController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return View::make('entity.create')->with('data', []);
+    {        
+        $entity = new Entity();            
+        return view('entity.create',compact('entity'))->with('data', []);       
     }
 
     /**
