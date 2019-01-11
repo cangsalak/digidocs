@@ -25,7 +25,7 @@
 		@endif	
 	</div>
 </div>
-<!--
+
 <div class="form-group row">
 	{!! Form::label('department',__('messages.DepartmentLabel'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
@@ -37,4 +37,15 @@
         @endif
 	</div>
 </div>
--->
+
+<div class="form-group row">
+	{!! Form::label('city',__('messages.CityLabel'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+	<div class="col-md-8">
+		{!! Form::select('city',$cities,null, array('class' => 'form-control chosen-select','placeholder'=>__('messages.City'))) !!}
+		@if ($errors->has('city'))		                        	
+            <span class="invalid-feedback" style="display: block;">
+                <strong>{{ $errors->first('city') }}</strong>
+            </span>
+        @endif
+	</div>
+</div>

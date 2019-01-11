@@ -35,8 +35,23 @@
         </div>
     </div>
 </div>
+<!-- Form en blanco para consultar Ciudades -->
+{!! Form::open(array('id'=>'form_consult_city','url' => 'storecitytrait')) !!}      
+{!! Form::close() !!}
+
 @endsection
 
+@section('script')
+    <script type="text/javascript">         
+
+        $("#department").change(function() {
+            var datos = new Array();
+            datos['id'] =$( "#department option:selected" ).val();             
+            ajaxobject.peticionajax($('#form_consult_city').attr('action'),datos,"store.consultaRespuestaCity");
+        });
+
+    </script>
+@endsection
 
 @section('style')
 <style>    

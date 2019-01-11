@@ -63,11 +63,14 @@ class EntityController extends Controller
     public function create()
     {        
         $entity = new Entity();
+        
         $departments = Department::departments();
+
         $cities = [];
         if(!empty($entity->department)){
             $cities = City::cities($entity->department);            
-        }           
+        } 
+                  
         return view('entity.create',compact('entity','departments','cities'))->with('data', []);       
     }
 
