@@ -27,6 +27,7 @@
                         </div>
                     </div>   
                     <div class="col-md-9">
+                        @include('layouts.alert')
                         <div class="card">
                             <div class="card-header">{{ __('messages.indexEntity') }}</div>
                             <div class="card-body">
@@ -77,7 +78,7 @@
                                                         {{$entity->adress}}
                                                     </div>                                
                                                     <div class="col-md-12">
-                                                        {{$entity->department}} - {{$entity->city}}
+                                                        {{$entity->department_class()->name}} - {{$entity->city_class()->name}}
                                                     </div>                                
                                                     <div class="col-md-12">
                                                         {{$entity->phone1}} - {{$entity->phone1}} - {{$entity->phone3}}

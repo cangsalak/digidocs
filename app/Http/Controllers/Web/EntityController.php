@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Web;
 use App\Model\Core\Entity;
 use App\Model\Core\Department;
 use App\Model\Core\City;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class EntityController extends Controller
 {
@@ -82,7 +85,47 @@ class EntityController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $this->validator($request->all())->validate();
+        if(!empty($request->file('image1'))){
+            $this->validatorImage(['image1'=>$request->file('image1')])->validate();
+            if(!$request->file('image1')->isValid()){
+                Session::flash('danger', [['EntityImgInvalid']]);
+                return redirect('entity/create');
+            }
+        }
+        if(!empty($request->file('image2'))){
+            $this->validatorImage(['image1'=>$request->file('image2')])->validate();
+            if(!$request->file('image2')->isValid()){
+                Session::flash('danger', [['EntityImgInvalid']]);
+                return redirect('entity/create');
+            }
+        }
+
+        $entity = new Entity();
+        $entity = $entity::create($request->input());
+        $entity->repository($entity->id);
+
+        $destinationPath = 'entities/'.$entity->id.'/profile';
+        $extension = $request->file('image1')->getClientOriginalExtension(); // getting image extension
+        $fileName_image1 = rand(1,9999999).'.'.$extension; // renameing image
+        $request->file('image1')->move($destinationPath, $fileName_image1);
+        chmod('entities/'.$entity->id.'/profile/'.$fileName_image1, 0777);
+        //$request->request->add(['scutcheon1' => $fileName_image]);
+        $entity->scutcheon1 = $fileName_image1;
+
+        $destinationPath = 'entities/'.$entity->id.'/profile';
+        $extension = $request->file('image2')->getClientOriginalExtension(); // getting image extension
+        $fileName_image2 = rand(1,9999999).'.'.$extension; // renameing image
+        $request->file('image2')->move($destinationPath, $fileName_image2);
+        chmod('entities/'.$entity->id.'/profile/'.$fileName_image2, 0777);
+        //$request->request->add(['scutcheon2' => $fileName_image]);
+        $entity->scutcheon2 = $fileName_image2;
+
+        $entity->save();
+        //create the directory of entity
+
+        Session::flash('success', [['EntityCreateOk']]);
+        return redirect('entity');
     }
 
     /**
@@ -132,5 +175,34 @@ class EntityController extends Controller
     {
         dd($request->input());
         return $id;
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => '
+                required|
+                string|
+                max:32',
+            'department' => '
+                required',
+            'city' => '
+                required',   
+            'email_institutional' => '
+                required',       
+            'description' => '
+                max:64',
+        ]);
+    }
+
+    protected function validatorImage(array $data)
+    {        
+        return Validator::make($data, [
+            'image1'=>'
+                required|
+                mimes:jpeg,bmp,png|
+                dimensions:max_width=700,max_width=700|
+                dimensions:min_width=64,min_width=64',                         
+        ]);
     }
 }

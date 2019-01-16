@@ -106,15 +106,15 @@
 </div>
 
 <div class="form-group row">
-	{!! Form::label('email',__('messages.Email'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
+	{!! Form::label('email_institutional',__('messages.Email'),['class'=>'col-sm-4 col-form-label text-md-right']) !!}
 	<div class="col-md-8">
-		@if($errors->has('email'))
-			{!! Form::email('email',null, ['class'=>'form-control is-invalid']) !!}
+		@if($errors->has('email_institutional'))
+			{!! Form::email('email_institutional',null, ['class'=>'form-control is-invalid']) !!}
 			<span class="invalid-feedback">
-                <strong>{{ $errors->first('email') }}</strong>
+                <strong>{{ $errors->first('email_institutional') }}</strong>
             </span>
 		@else
-			{!! Form::email('email',null, ['class'=>'form-control']) !!}
+			{!! Form::email('email_institutional',null, ['class'=>'form-control']) !!}
 		@endif	
 	</div>
 </div>
