@@ -348,6 +348,7 @@ class ComposerStaticInit3fda944098900b76a44837aaf6cdb84c
     public static $classMap = array (
         'AcountsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AcountsTableSeeder.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Dependence' => __DIR__ . '/../..' . '/app/Dependence.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',

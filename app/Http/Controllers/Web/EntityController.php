@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\User;
 use App\Model\Core\Entity;
 use App\Model\Core\Department;
 use App\Model\Core\City;
@@ -105,24 +106,40 @@ class EntityController extends Controller
         $entity = $entity::create($request->input());
         $entity->repository($entity->id);
 
-        $destinationPath = 'entities/'.$entity->id.'/profile';
-        $extension = $request->file('image1')->getClientOriginalExtension(); // getting image extension
-        $fileName_image1 = rand(1,9999999).'.'.$extension; // renameing image
-        $request->file('image1')->move($destinationPath, $fileName_image1);
-        chmod('entities/'.$entity->id.'/profile/'.$fileName_image1, 0777);
-        //$request->request->add(['scutcheon1' => $fileName_image]);
-        $entity->scutcheon1 = $fileName_image1;
+        if(!empty($request->file('image1'))){
+            //create the directory of entity
+            $destinationPath = 'entities/'.$entity->id.'/profile';
+            $extension = $request->file('image1')->getClientOriginalExtension(); // getting image extension
+            $fileName_image1 = rand(1,9999999).'.'.$extension; // renameing image
+            $request->file('image1')->move($destinationPath, $fileName_image1);
+            chmod('entities/'.$entity->id.'/profile/'.$fileName_image1, 0777);
+            //$request->request->add(['scutcheon1' => $fileName_image]);
+            $entity->scutcheon1 = $fileName_image1;
+        }
 
-        $destinationPath = 'entities/'.$entity->id.'/profile';
-        $extension = $request->file('image2')->getClientOriginalExtension(); // getting image extension
-        $fileName_image2 = rand(1,9999999).'.'.$extension; // renameing image
-        $request->file('image2')->move($destinationPath, $fileName_image2);
-        chmod('entities/'.$entity->id.'/profile/'.$fileName_image2, 0777);
-        //$request->request->add(['scutcheon2' => $fileName_image]);
-        $entity->scutcheon2 = $fileName_image2;
-
+        if(!empty($request->file('image2'))){
+            $destinationPath = 'entities/'.$entity->id.'/profile';
+            $extension = $request->file('image2')->getClientOriginalExtension(); // getting image extension
+            $fileName_image2 = rand(1,9999999).'.'.$extension; // renameing image
+            $request->file('image2')->move($destinationPath, $fileName_image2);
+            chmod('entities/'.$entity->id.'/profile/'.$fileName_image2, 0777);
+            //$request->request->add(['scutcheon2' => $fileName_image]);
+            $entity->scutcheon2 = $fileName_image2;
+        }
+        //update user
         $entity->save();
-        //create the directory of entity
+
+        //Create Admin user from entity
+        //user database        
+        $request->request->add(['email' => $request->input('email_institutional')]);
+        $request->request->add(['password' => \Hash::make($request->input('nit'))]);
+        $request->request->add(['rol_id' => 2]);
+        $request->request->add(['rel_entity_id' => $entity->id]);        
+        //user folder
+
+        $user = new User();
+        $user = $user::create($request->input());
+        $user->repository($user->id);
 
         Session::flash('success', [['EntityCreateOk']]);
         return redirect('entity');
@@ -180,6 +197,10 @@ class EntityController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'nit' => '
+                required|
+                string|
+                max:32',
             'name' => '
                 required|
                 string|

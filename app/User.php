@@ -17,8 +17,8 @@ class User extends Authenticatable
      *
      * @var array
      */
-     protected $fillable = [
-        'name','surname', 'email', 'phone','avatar', 'password','active','rol_id','rel_entiti_id'
+    protected $fillable = [
+        'name','surname', 'email', 'phone','avatar', 'password','active','rol_id','rel_entity_id'
     ];
 
     /**
@@ -62,5 +62,27 @@ class User extends Authenticatable
             $permits[$option->module()->get()[0]->name]['options'][$option->id]=$option->toArray();
         }        
         Session::put('permits', $permits);
+    }
+
+    //repository
+    public function repository($user_id){
+        //verificacion de existencia de directorio
+        if (is_dir('users/'.$user_id)){
+            return false;
+        }
+        if(!mkdir('users/'.$user_id.'/profile',0777,true)){
+            return false;
+        }
+         chmod('users/'.$user_id, 0777);
+        if (!copy('images/user/default.png', 'users/'.$user_id.'/profile/default.png')) {
+           return false;
+        }
+        chmod('users/'.$user_id.'/profile/default.png', 0777);
+
+        if(!mkdir('users/'.$user_id.'/stores',0777,true)){
+            return false;                                   
+        }                               
+        chmod('users/'.$user_id, 0777);
+        return true;
     }
 }

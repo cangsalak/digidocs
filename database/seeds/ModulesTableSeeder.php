@@ -40,6 +40,12 @@ class ModulesTableSeeder extends Seeder
 			'description'=>'ModuleEntities',
 			'label'=>'{"action":"entity"}'
 			)
+		);
+		\DB::table('modules')->insert(array(
+			'name'=>'Dependences',
+			'description'=>'ModuleDependences',
+			'label'=>'{"action":"dependence"}'
+			)
 		);		
     }
 }

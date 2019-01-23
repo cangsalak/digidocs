@@ -1,0 +1,11 @@
+@media (min-width: 1200px){
+    .container {
+        max-width: 100%;
+    }
+
+    .container > div div{
+        padding-right: 2px;
+        padding-left: 2px;      
+    }
+    
+}

@@ -26,6 +26,12 @@ class Entity extends Model
 		'active'
 	];
 
+    //una Entidad puede tener muchas dependencias
+    public function dependences(){
+        //no usa el namespace
+        return $this->hasMany(Dependence::class);
+    }   
+
     //found attr_id
     public function department_class(){
         return Department::find($this->id);

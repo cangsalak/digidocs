@@ -23,5 +23,6 @@ Route::resource('rol', 'Web\RolController');
 Route::resource('user', 'Web\UserController');
 Route::resource('module', 'Web\ModuleController');
 Route::resource('entity', 'Web\EntityController');
+Route::resource('dependence', 'Web\DependenceController');
 
 Route::post('citytrait', 'HomeController@consultarcity');

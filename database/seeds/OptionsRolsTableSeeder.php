@@ -91,5 +91,32 @@ class OptionsRolsTableSeeder extends Seeder
 			'option_id'=>15			
 			)
 		);		
+
+		//options form dependences
+		\DB::table('option_rol')->insert(array(
+			'rol_id'=>2,			
+			'option_id'=>16
+			)
+		);
+		\DB::table('option_rol')->insert(array(
+			'rol_id'=>2,			
+			'option_id'=>17
+			)
+		);
+		\DB::table('option_rol')->insert(array(
+			'rol_id'=>2,			
+			'option_id'=>18
+			)
+		);
+		\DB::table('option_rol')->insert(array(
+			'rol_id'=>2,			
+			'option_id'=>19
+			)
+		);
+		\DB::table('option_rol')->insert(array(
+			'rol_id'=>2,			
+			'option_id'=>20
+			)
+		);		
     }
 }
