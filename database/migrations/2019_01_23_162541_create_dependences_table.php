@@ -27,7 +27,7 @@ class CreateDependencesTable extends Migration
             $table->boolean('active')->default(true);            
             $table->timestamps();
             $table->integer('entity_id')->unsigned()->default(2);            
-            $table->foreign('entity_id')->references('id')->on('entity')
+            $table->foreign('entity_id')->references('id')->on('entities')
             ->onDelete('cascade')
             ->onUpdate('cascade');
         });
