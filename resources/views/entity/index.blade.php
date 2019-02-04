@@ -77,7 +77,7 @@
                                                     <div class="col-md-12">
                                                         {{$entity->adress}}
                                                     </div>                                
-                                                    <div class="col-md-12">
+                                                    <div class="col-md-12">                                                        
                                                         {{$entity->department_class()->name}} - {{$entity->city_class()->name}}
                                                     </div>                                
                                                     <div class="col-md-12">
@@ -99,10 +99,10 @@
 
                                  </div>
                             </div>
-                            {{ $entities->links() }}
+                            {{-- $entities->links() --}}
                             {{-- $data['entities']->links() --}}
                         </div>
-                        {{-- $data['entities']->appends(['sort' => 'votes'])->links() --}}
+                        {{ $entities->appends(['nit' => $inputs['nit'],'name'=>$inputs['name'],'description'=>$inputs['description']])->links() }}
                         
                     </div>
                 </div>

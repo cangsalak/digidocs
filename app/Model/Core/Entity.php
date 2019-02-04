@@ -34,11 +34,13 @@ class Entity extends Model
 
     //found attr_id
     public function department_class(){
-        return Department::find($this->id);
+        //return Department::find($this->id);        
+        return Entity::select('department as name')->where('id',$this->id)->first();
     }
 
     public function city_class(){
-        return City::find($this->id);
+        //return City::find($this->id);
+        return Entity::select('city as name')->where('id',$this->id)->first();
     }
 
     //Query Scope

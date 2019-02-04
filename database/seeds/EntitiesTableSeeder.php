@@ -11,6 +11,6 @@ class EntitiesTableSeeder extends Seeder
      */
     public function run()
     {
-    	//factory(App\Model\Core\Entity::class,60)->create();	
+    	factory(App\Model\Core\Entity::class,60)->create();	
     }
 }

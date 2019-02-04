@@ -28,8 +28,7 @@ class EntityController extends Controller
      */
     public function index(Request $request)
     {
-        //muestra todos las entidades
-        
+        //muestra todos las entidades        
         
         //dd(Entity::select()->paginate(3)->items());        
         
@@ -40,11 +39,9 @@ class EntityController extends Controller
         */
 
         $inputs = $request->input();
-        if(empty($inputs)){
-            $inputs['nit']=null;
-            $inputs['name']=null;
-            $inputs['description']=null;
-        }
+        if(empty($inputs['nit']))$inputs['nit']=null;
+        if(empty($inputs['name']))$inputs['name']=null;    
+        if(empty($inputs['description']))$inputs['description']=null;    
 
         $nit = $request->get('nit');
         $name = $request->get('name');
